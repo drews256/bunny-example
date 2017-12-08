@@ -14,7 +14,7 @@ class BunnySubscriber
     begin
       queue.subscribe(:manual_ack => true, :block => true) do |delivery_info, properties, body|
         # Do something with the body
-        puts "Recieved Body from Task Queue #{body}"
+        puts "Received Body from Task Queue #{body}"
         # Acknowledge the message was delivered
         puts "Delivery info delivery Tag #{delivery_info.delivery_tag}"
         channel.ack(delivery_info.delivery_tag)

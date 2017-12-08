@@ -8,8 +8,8 @@ class BunnySubscriberDeux
     @channel = connection.create_channel
     @queue = @channel.queue("other_task_queue", durable: true)
 
-    #Instead of binding the queue when we create the exchange
-    #We can bind after the fact, so adding queue to an exchange is no issue
+    # Instead of binding the queue when we create the exchange
+    # We can bind after the fact, so adding queue to an exchange is no issue
     @exchange = @channel.exchange("task_fanout", type: "fanout")
     @queue.bind(@exchange)
   end
@@ -18,7 +18,7 @@ class BunnySubscriberDeux
     begin
       queue.subscribe(:manual_ack => true, :block => true) do |delivery_info, properties, body|
         # Do something with the body
-        puts "Recieved Body from Other Task Queue #{body}"
+        puts "Received Body from Other Task Queue #{body}"
         # Acknowledge the message was delivered
         puts "Delivery info delivery Tag #{delivery_info.delivery_tag}"
         channel.ack(delivery_info.delivery_tag)

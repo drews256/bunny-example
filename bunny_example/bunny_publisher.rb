@@ -13,10 +13,10 @@ class BunnyPublisher
     # Step 4. Create a new channel
     @channel = connection.create_channel
 
-    # Step 5. Connect to or Create a new Exchange from the channel
+    # Step 5. Connect to or Create a new Queue from the channel
     @queue = @channel.queue("task_queue", :durable => true)
 
-    # Step 6. Create an exchange
+    # Step 6. Connect to or Create an Exchange
     @exchange = @channel.exchange("task_fanout", type: 'fanout')
 
     # Step 7. Bind the queue to the exchange
